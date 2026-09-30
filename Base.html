@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{{ app_name }}{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-row">
+      <div>
+        <h1>{{ app_name }}</h1>
+        <p class="subtitle">Pflege- und Beratungsstellen in Deutschland finden und per E-Mail kontaktieren</p>
+      </div>
+      {# AP6-FEHLT: Navigation (Historie, Dashboard, Pflege) erst anlegen, wenn die Seiten existieren.
+         Sichtbarkeit dann über data-recht (permissions.js), Durchsetzung im Backend (AP1). #}
+      {% if user %}
+      <div class="user-info">
+        <span>Angemeldet als {{ user.name or user.email or user.sub }}</span>
+        <a href="/auth/logout">Abmelden</a>
+      </div>
+      {% endif %}
+    </div>
+  </header>
+  {% block content %}{% endblock %}
+  {# CSP (app/security.py): script-src 'self' -> keine Inline-Skripte, kein CDN. #}
+  {% block scripts %}{% endblock %}
+</body>
+</html>
