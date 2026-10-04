@@ -1,3 +1,5 @@
+body { outline: 5px solid red !important; }
+
 :root {
   --color-bg: #f7f8fa;
   --color-surface: #ffffff;
